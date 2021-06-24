@@ -12,11 +12,11 @@ namespace RatingApp.Tests
 
         // Mock logger 
         private Mock<ILogger> mockLogger;
-        private RaterFactory raterFactory;
+        private RaterFactory sut;
         public TestRaterFactory()
         {
             mockLogger = new Mock<ILogger>();
-            raterFactory = new RaterFactory(mockLogger.Object);
+            sut = new RaterFactory(mockLogger.Object);
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.Type = PolicyType.Life;
 
-            var result = raterFactory.Create(policy);
+            var result = sut.Create(policy);
 
             Assert.Equal(typeof(LifePolicyRater), result.GetType());
         }
@@ -36,7 +36,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.Type = PolicyType.Land;
 
-            var result = raterFactory.Create(policy);
+            var result = sut.Create(policy);
 
             Assert.Equal(typeof(LandPolicyRater), result.GetType());
         }
@@ -47,7 +47,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.Type = PolicyType.Auto;
 
-            var result = raterFactory.Create(policy);
+            var result = sut.Create(policy);
 
             Assert.Equal(typeof(AutoPolicyRater), result.GetType());
         }
@@ -58,7 +58,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.Type = (PolicyType)8;
 
-            var result = raterFactory.Create(policy);
+            var result = sut.Create(policy);
 
             Assert.Equal(typeof(UnknownPolicyRater), result.GetType());
         }
@@ -69,7 +69,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.Type = PolicyType.Auto;
 
-            var result = raterFactory.CreateAutomated(policy);
+            var result = sut.CreateAutomated(policy);
 
             Assert.Equal(typeof(AutoPolicyRater), result.GetType());
         }
@@ -80,7 +80,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.Type = PolicyType.Life;
 
-            var result = raterFactory.CreateAutomated(policy);
+            var result = sut.CreateAutomated(policy);
 
             Assert.Equal(typeof(LifePolicyRater), result.GetType());
         }
@@ -91,7 +91,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.Type = PolicyType.Land;
 
-            var result = raterFactory.CreateAutomated(policy);
+            var result = sut.CreateAutomated(policy);
 
             Assert.Equal(typeof(LandPolicyRater), result.GetType());
         }
@@ -102,7 +102,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.Type = (PolicyType)8;
 
-            var result = raterFactory.CreateAutomated(policy);
+            var result = sut.CreateAutomated(policy);
 
             Assert.Equal(typeof(UnknownPolicyRater), result.GetType());
         }

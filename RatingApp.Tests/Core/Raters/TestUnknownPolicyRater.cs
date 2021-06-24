@@ -12,18 +12,18 @@ namespace RatingApp.Tests
 
         // Mock logger 
         private Mock<ILogger> mockLogger;
-        private Rater rater;
+        private Rater sut;
         public TestUnknownPolicyRater()
         {
             mockLogger = new Mock<ILogger>();
-            rater = new UnknownPolicyRater(mockLogger.Object);
+            sut = new UnknownPolicyRater(mockLogger.Object);
             policy.Type = (PolicyType)8; // unknown policy
         }
 
         [Fact]
         public void TestUnknownPolicyType()
         {
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
             Assert.Equal(0m, result, 0);
         }
     }

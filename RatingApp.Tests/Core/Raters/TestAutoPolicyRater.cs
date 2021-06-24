@@ -12,11 +12,11 @@ namespace RatingApp.Tests
 
         // Mock logger 
         private Mock<ILogger> mockLogger;
-        private Rater rater;
+        private Rater sut;
         public TestAutoPolicyRater()
         {
             mockLogger = new Mock<ILogger>();
-            rater = new AutoPolicyRater(mockLogger.Object);
+            sut = new AutoPolicyRater(mockLogger.Object);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace RatingApp.Tests
             policy.Make = "BMW";
             policy.Deductible = 499m;
 
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(1000m, result, 0);
         }
@@ -40,7 +40,7 @@ namespace RatingApp.Tests
             policy.Make = "BMW";
             policy.Deductible = 500m; // Test boundary
 
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(900m, result, 0);
         }
@@ -52,7 +52,7 @@ namespace RatingApp.Tests
             policy.Type = PolicyType.Auto;
             policy.Make = "Volvo";
 
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(0m, result, 0);
         }
@@ -64,7 +64,7 @@ namespace RatingApp.Tests
             policy.Type = PolicyType.Auto;
             policy.Make = default;
 
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(0m, result, 0);
         }

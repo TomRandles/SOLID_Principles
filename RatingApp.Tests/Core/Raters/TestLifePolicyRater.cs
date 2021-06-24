@@ -13,11 +13,11 @@ namespace RatingApp.Tests
 
         // Mock logger 
         private Mock<ILogger> mockLogger;
-        private Rater rater;
+        private Rater sut;
         public TestLifePolicyRater()
         {
             mockLogger = new Mock<ILogger>();
-            rater = new LifePolicyRater(mockLogger.Object);
+            sut = new LifePolicyRater(mockLogger.Object);
             policy.Type = PolicyType.Life; 
             policy.IsSmoker = false;
         }
@@ -28,7 +28,7 @@ namespace RatingApp.Tests
             // Setup policy    
             
             policy.DateOfBirth = DateTime.MinValue;
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(0m, result, 0);
         }
@@ -39,7 +39,7 @@ namespace RatingApp.Tests
             // Setup policy    
             policy.DateOfBirth = DateTime.Today.AddYears(-100);
 
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(0m, result, 0);
         }
@@ -51,7 +51,7 @@ namespace RatingApp.Tests
             policy.DateOfBirth = DateTime.Today.AddYears(-99);
             policy.Amount = 0m;
 
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(0m, result, 0);
         }
@@ -65,7 +65,7 @@ namespace RatingApp.Tests
             policy.IsSmoker = false;
 
             var expectedResult = policy.Amount * 99 / 200;
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(expectedResult, result, 0);
         }
@@ -79,7 +79,7 @@ namespace RatingApp.Tests
             policy.IsSmoker = true;
 
             var expectedResult = ((policy.Amount * 99 / 200) * 2);
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(expectedResult, result, 0);
         }

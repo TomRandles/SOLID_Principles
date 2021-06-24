@@ -12,11 +12,11 @@ namespace RatingApp.Tests
 
         // Mock logger 
         private Mock<ILogger> mockLogger;
-        private Rater rater;
+        private Rater sut;
         public TestLandPolicyRater()
         {
             mockLogger = new Mock<ILogger>();
-            rater = new LandPolicyRater(mockLogger.Object);
+            sut = new LandPolicyRater(mockLogger.Object);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace RatingApp.Tests
             policy.Type = PolicyType.Land;
             policy.BondAmount = 0m;
             
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(0m, result, 0);
         }
@@ -38,7 +38,7 @@ namespace RatingApp.Tests
             policy.Type = PolicyType.Land;
             policy.Valuation = 0m;
 
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(0m, result, 0);
         }
@@ -51,7 +51,7 @@ namespace RatingApp.Tests
             policy.Valuation = 1000m; 
             policy.BondAmount = 0.79m * policy.Valuation;
             
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(0m, result, 0);
         }
@@ -66,7 +66,7 @@ namespace RatingApp.Tests
 
             var expectedResult = policy.BondAmount * 0.05m;
 
-            var result = rater.RatePolicy(policy);
+            var result = sut.RatePolicy(policy);
 
             Assert.Equal(expectedResult, result, 0);
         }

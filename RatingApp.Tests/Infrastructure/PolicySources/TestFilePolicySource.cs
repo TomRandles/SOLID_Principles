@@ -9,16 +9,11 @@ namespace RatingApp.Tests.Infrastructure.Serializers
 {
     public class TestFilePolicySource
     {
-
         [Fact]
         public void TestDefaultFilePolicySource()
         {
             var expectedPolicyJson =
                 "{ \"type\": \"Land\", \"bondAmount\": \"1000000\", \"valuation\": \"1100000\"}";
-
-            // Create mock FilePolicySource 
-            // Mock<IPolicySource> mockFilePolicySource = new Mock<IPolicySource>();
-            // mockFilePolicySource.Setup(x => x.GetPolicyFromSource()).Returns
 
             var sut = new FilePolicySource();
 

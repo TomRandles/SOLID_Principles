@@ -45,15 +45,14 @@ namespace RatingApp.Tests
         public void TestRatingEngineLandPolicy()
         {
             // Setup ratingEngine
-
-            var ratingEngine = new RatingEngine(mockLogger.Object,
-                                                mockPolicySource.Object,
-                                                mockPolicySerialize.Object,
-                                                mockRaterFactory.Object);
+            var sut = new RatingEngine(mockLogger.Object,
+                                       mockPolicySource.Object,
+                                       mockPolicySerialize.Object,
+                                       mockRaterFactory.Object);
 
             var expectedResult = 1000000m * 0.05m;
             
-            var result = ratingEngine.Rate();
+            var result = sut.Rate();
 
             Assert.Equal(expectedResult, result, 2);
         }
