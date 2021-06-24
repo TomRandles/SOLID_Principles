@@ -12,10 +12,5 @@ namespace RatingApp.Infrastructure.Serializers
             return JsonConvert.DeserializeObject<Policy>(jsonInput,
                 new StringEnumConverter());
         }
-
-        Policy IPolicySerializer.GetPolicyFromString(string policyString)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
